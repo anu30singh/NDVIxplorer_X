@@ -2,32 +2,31 @@
 
 **NDVIxplorer** is a beginner-friendly web app that lets anyone analyze and visualize green cover using satellite imagery — no GIS experience required.
 
-🌱 Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetation Index (NDVI)** from GeoTIFF files and presents:
+Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetation Index (NDVI)** from GeoTIFF files and presents:
 - A color-coded NDVI heatmap
 - Interpretable vegetation stats
 - A non-technical explanation of what NDVI means
 
 ---
 
-## 🌍 Live Demo
+##  Live Demo
 
-[🔗 Click here to try the app](https://your-ndvixplorer-demo.streamlit.app) *(Replace with your actual Streamlit Cloud URL)*
+[🔗 Click here to try the app](https://anu30singh-ndvixplorer-x-app-dzfiwb.streamlit.app/)
 
 ---
 
-## 🎯 Features
+##  Features
 
 ✅ Upload GeoTIFF files (Red + NIR bands)  
 ✅ Automatic NDVI calculation  
 ✅ Beautiful NDVI heatmap visualization using Matplotlib  
 ✅ Interpretable NDVI statistics (min, max, mean)  
 ✅ Beginner-friendly UI with explanations for non-GIS users  
-✅ Sidebar "About" section for context and learning  
-✅ Clean layout with Streamlit UI components  
+
 
 ---
 
-## 🧠 What is NDVI?
+##  What is NDVI?
 
 > NDVI = (NIR - Red) / (NIR + Red)
 
@@ -42,7 +41,7 @@ NDVI is a remote sensing index that reflects vegetation health. It uses the Red 
 
 ---
 
-## 💡 Use Cases
+##  Use Cases
 
 - 👨‍🌾 Agriculture: monitor crop health
 - 🌆 Urban planning: measure green cover
@@ -52,9 +51,9 @@ NDVI is a remote sensing index that reflects vegetation health. It uses the Red 
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
-### 🔧 Prerequisites
+###  Prerequisites
 
 - Python 3.8+
 - pip
