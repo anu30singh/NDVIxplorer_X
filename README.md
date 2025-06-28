@@ -9,13 +9,13 @@ Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetat
 
 ---
 
-## 🌍 Live Demo
+##  Live Demo
 
 [🔗 Click here to try the app](https://anu30singh-ndvixplorer-x-app-dzfiwb.streamlit.app/)
 
 ---
 
-## 🎯 Features
+##  Features
 
 ✅ Upload GeoTIFF files (Red + NIR bands)  
 ✅ Automatic NDVI calculation  
@@ -27,7 +27,7 @@ Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetat
 
 ---
 
-## 🧠 What is NDVI?
+##  What is NDVI?
 
 > NDVI = (NIR - Red) / (NIR + Red)
 
@@ -42,7 +42,7 @@ NDVI is a remote sensing index that reflects vegetation health. It uses the Red 
 
 ---
 
-## 💡 Use Cases
+##  Use Cases
 
 - 👨‍🌾 Agriculture: monitor crop health
 - 🌆 Urban planning: measure green cover
@@ -52,9 +52,9 @@ NDVI is a remote sensing index that reflects vegetation health. It uses the Red 
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
-### 🔧 Prerequisites
+###  Prerequisites
 
 - Python 3.8+
 - pip
