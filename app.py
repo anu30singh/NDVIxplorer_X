@@ -2,75 +2,100 @@ import streamlit as st
 import numpy as np
 import rasterio
 import matplotlib.pyplot as plt
-import leafmap.foliumap as leafmap
-import tempfile
+
 
 st.set_page_config(page_title="NDVIxplorer", page_icon="🛰️", layout="wide")
+
+
+with st.sidebar:
+
+    st.title("About NDVIxplorer")
+    st.markdown("""
+    **NDVIxplorer** is a web-based tool for visualizing vegetation health using satellite imagery.
+
+    🛰️ Built with **Streamlit + Rasterio**  
+    🌍 Uses the **NDVI formula**:  
+    `(NIR - Red) / (NIR + Red)`
+
+    **Who is this for?**
+    - Students & researchers 🌱  
+    - Urban planners 🏙️  
+    - Environmentalists 🌏  
+    - Anyone curious about green spaces!
+    
+    ---
+    Made with ❤️ by Anushka
+    """)
+
+# --- Title & Intro ---
 st.title("🛰️ NDVIxplorer - Urban Green Cover Analyzer")
+st.markdown("""
+Welcome to **NDVIxplorer** – an intuitive tool to understand and visualize vegetation health from satellite imagery.
 
-st.markdown("Upload a **GeoTIFF** file, and this tool will calculate and visualize the **NDVI (Normalized Difference Vegetation Index)**.")
+### 🌿 What is NDVI?
+**NDVI (Normalized Difference Vegetation Index)** is a number between -1 and 1 that shows how green (and healthy) an area is. It’s used worldwide in:
+-  Agriculture
+-  Urban planning
+-  Forestry
+-  Disaster monitoring
 
-uploaded_file = st.file_uploader("📤 Upload GeoTIFF", type=["tif", "tiff"])
+NDVI is calculated from:
+- **Red Band**: Plants absorb red light
+- **NIR Band**: Healthy vegetation reflects near-infrared light
 
-def save_ndvi_to_tif(ndvi_array, transform, crs):
-    with tempfile.NamedTemporaryFile(suffix=".tif", delete=False) as tmpfile:
-        with rasterio.open(
-            tmpfile.name,
-            "w",
-            driver="GTiff",
-            height=ndvi_array.shape[0],
-            width=ndvi_array.shape[1],
-            count=1,
-            dtype=ndvi_array.dtype,
-            crs=crs,
-            transform=transform,
-        ) as dst:
-            dst.write(ndvi_array, 1)
-        return tmpfile.name
+The formula is:  
+`NDVI = (NIR - Red) / (NIR + Red)`
+""")
+
+# --- File Upload ---
+st.markdown("### Upload your GeoTIFF satellite image (Red + NIR bands):")
+uploaded_file = st.file_uploader("Supported format: `.tif`, `.tiff`", type=["tif", "tiff"])
 
 if uploaded_file:
     with rasterio.open(uploaded_file) as src:
-        st.success("File uploaded successfully!")
+        st.success("✅ File uploaded successfully!")
 
-        bands = src.count
-        if bands < 2:
-            st.warning("The image must have at least 2 bands: Red and NIR.")
+        if src.count < 2:
+            st.error(" This image must contain at least 2 bands: Red and NIR.")
         else:
-            # Note: NDVI = (NIR - Red) / (NIR + Red)
+            red = src.read(1).astype("float32")
+            nir = src.read(2).astype("float32")
 
-            red = src.read(1).astype("float32")  
-            nir = src.read(2).astype("float32")  
+            # --- NDVI Calculation ---
+            ndvi = np.where((nir + red) == 0, 0, (nir - red) / (nir + red))
 
-            # Avoid divide-by-zero
-            ndvi = np.where(
-                (nir + red) == 0,
-                0,
-                (nir - red) / (nir + red)
-            )
-
-            # Plot NDVI
+            # --- NDVI Visualization ---
+            st.markdown("### NDVI Visualization")
             fig, ax = plt.subplots(figsize=(10, 6))
             ndvi_plot = ax.imshow(ndvi, cmap='YlGn', vmin=-1, vmax=1)
-            ax.set_title("NDVI Visualization")
+            ax.set_title("NDVI Heatmap (YlGn colormap)", fontsize=16)
             fig.colorbar(ndvi_plot, ax=ax, label="NDVI Value")
             st.pyplot(fig)
 
-            # Show basic NDVI stats
-            st.markdown("### 🌿 NDVI Stats")
-            st.write(f"Min NDVI: {ndvi.min():.2f}")
-            st.write(f"Max NDVI: {ndvi.max():.2f}")
-            st.write(f"Mean NDVI: {ndvi.mean():.2f}")
+            # --- Stats ---
+            st.markdown("###  NDVI Statistics")
+            col1, col2, col3 = st.columns(3)
+            col1.metric("🌱 Min NDVI", f"{ndvi.min():.2f}")
+            col2.metric("🌾 Max NDVI", f"{ndvi.max():.2f}")
+            col3.metric("📈 Mean NDVI", f"{ndvi.mean():.2f}")
 
-            # Save NDVI as temporary GeoTIFF
-            ndvi_tif_path = save_ndvi_to_tif(ndvi, src.transform, src.crs)
+            # --- NDVI Meaning Table ---
+            st.markdown("""
+### 📚 NDVI Interpretation Guide
 
-            st.subheader("🗺️ NDVI Map Overlay (Interactive)")
+| NDVI Value     | Meaning                    |
+|----------------|----------------------------|
+| 0.6 to 1.0     | Dense, healthy vegetation  |
+| 0.2 to 0.6     | Moderate vegetation   |
+| 0.0 to 0.2     | Sparse plants or soil     |
+| < 0.0          | Water, snow, or urban     |
+""")
 
-            # Create map centered on data bounds
-            bounds = src.bounds
-            center_lat = (bounds.top + bounds.bottom) / 2
-            center_lon = (bounds.left + bounds.right) / 2
 
-            m = leafmap.Map(center=(center_lat, center_lon), zoom=10)
-            m.add_raster(ndvi_tif_path, layer_name="NDVI", colormap="YlGn")
-            m.to_streamlit(height=500)
+            st.markdown("""
+---
+> NDVIxplorer is your quick, accessible, and free way to explore Earth’s green footprint from space — no GIS expertise needed.
+""")
+
+else:
+    st.info("👆 Upload a GeoTIFF image to begin your NDVI analysis.")
