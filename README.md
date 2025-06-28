@@ -22,8 +22,7 @@ Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetat
 ✅ Beautiful NDVI heatmap visualization using Matplotlib  
 ✅ Interpretable NDVI statistics (min, max, mean)  
 ✅ Beginner-friendly UI with explanations for non-GIS users  
-✅ Sidebar "About" section for context and learning  
-✅ Clean layout with Streamlit UI components  
+
 
 ---
 
