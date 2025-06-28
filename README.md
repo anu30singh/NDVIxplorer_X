@@ -2,7 +2,7 @@
 
 **NDVIxplorer** is a beginner-friendly web app that lets anyone analyze and visualize green cover using satellite imagery — no GIS experience required.
 
-🌱 Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetation Index (NDVI)** from GeoTIFF files and presents:
+Powered by Streamlit, NDVIxplorer calculates the **Normalized Difference Vegetation Index (NDVI)** from GeoTIFF files and presents:
 - A color-coded NDVI heatmap
 - Interpretable vegetation stats
 - A non-technical explanation of what NDVI means
@@ -11,7 +11,7 @@
 
 ## 🌍 Live Demo
 
-[🔗 Click here to try the app](https://your-ndvixplorer-demo.streamlit.app) *(Replace with your actual Streamlit Cloud URL)*
+[🔗 Click here to try the app](https://anu30singh-ndvixplorer-x-app-dzfiwb.streamlit.app/)
 
 ---
 
