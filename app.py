@@ -12,15 +12,14 @@ with st.sidebar:
     st.title("About NDVIxplorer")
     st.markdown("""
     **NDVIxplorer** is a web-based tool for visualizing vegetation health using satellite imagery.
-
-    🛰️ Built with **Streamlit + Rasterio**  
-    🌍 Uses the **NDVI formula**:  
+                
+     Uses the **NDVI formula**:  
     `(NIR - Red) / (NIR + Red)`
 
     **Who is this for?**
-    - Students & researchers 🌱  
-    - Urban planners 🏙️  
-    - Environmentalists 🌏  
+    - Students & researchers   
+    - Urban planners 
+    - Environmentalists   
     - Anyone curious about green spaces!
     
     ---
