@@ -51,8 +51,6 @@ NDVI is a remote sensing index that reflects vegetation health. It uses the Red 
 
 ---
 
-##  Getting Started
-
 ###  Prerequisites
 
 - Python 3.8+
